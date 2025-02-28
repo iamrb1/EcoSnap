@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ecosnap</string>
     <string name="Michigan">Michigan</string>
+    <string name="homepage">Homepage</string>
+    <string name="map">Map</string>
+    <string name="camera">Camera</string>
+    <string name="profile">Profile</string>
 </resources>

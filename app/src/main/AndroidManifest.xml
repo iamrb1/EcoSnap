@@ -13,7 +13,19 @@
         android:theme="@style/Theme.Ecosnap"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".Account"
+            android:exported="false" />
+        <activity
+            android:name=".Leaderboard"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Camera"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
