@@ -22,23 +22,25 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/homepage"
+            android:onClick="onStartHome"
             android:src="@android:drawable/btn_star" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/Leaderboard"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/map"
-            android:src="@android:drawable/ic_menu_mapmode" />
+            android:onClick="onStartLeaderboard"
+            android:src="@android:drawable/ic_menu_myplaces" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/Camera"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -47,11 +49,12 @@
             android:src="@android:drawable/ic_menu_camera" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/Profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/profile"
+            android:onClick="onStartProfile"
             android:src="@android:drawable/ic_menu_view" />
     </LinearLayout>
 
