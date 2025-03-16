@@ -23,6 +23,7 @@
             android:backgroundTint="@color/white"
             android:contentDescription="@string/back_to_homepage"
             android:gravity="start"
+            android:onClick="onBacktoHomepage"
             app:srcCompat="?attr/homeAsUpIndicator" />
     </FrameLayout>
 
