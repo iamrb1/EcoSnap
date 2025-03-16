@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ecosnap</string>
+    <string name="app_name">EcoSnap</string>
     <string name="Michigan">Michigan</string>
     <string name="homepage">Homepage</string>
     <string name="map">Map</string>
@@ -10,4 +10,9 @@
     <string name="HomeBody">Welcome to EcoSnap! Recycle and compete with your friends to see who is the best contributor to the environment! The application comes with four buttons: home, camera, profile, and leaderboard. The home button takes you to the homepage where as the camera button allows for you to take a picture of any item and determine whether it is recyclable or not. Create an account and view your profile details within profile and track your friends\' stats within the leaderboard page! Have fun recycling and engage in the competition!</string>
     <string name="snap">Snap!</string>
     <string name="back_to_homepage">Back to Homepage</string>
+    <string name="login">Login</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="create_account">Don\'t have an account? Create One</string>
+    <string name="button">Button</string>
 </resources>
