@@ -5,14 +5,58 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher_background"
     android:orientation="vertical"
     tools:context=".Home">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:layout_weight="0.2">
 
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/Home"
+            android:textColor="@color/dark_green"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:background="@drawable/design"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="10dp"
+                android:text="@string/HomeBody"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
     </FrameLayout>
 
     <LinearLayout
@@ -22,37 +66,48 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/circle"
             android:contentDescription="@string/homepage"
-            android:src="@android:drawable/btn_star" />
+            android:onClick="onStartHome"
+            android:src="@android:drawable/btn_star"
+            app:tint="@color/dark_green" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/Leaderboard"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/circle"
             android:contentDescription="@string/map"
-            android:src="@android:drawable/ic_menu_mapmode" />
+            android:onClick="onStartLeaderboard"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:tint="@color/dark_green" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/Camera"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/circle"
             android:contentDescription="@string/camera"
             android:onClick="onStartCamera"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:src="@android:drawable/ic_menu_camera"
+            app:tint="@color/dark_green" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/Profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/circle"
             android:contentDescription="@string/profile"
-            android:src="@android:drawable/ic_menu_view" />
+            android:onClick="onStartProfile"
+            android:src="@android:drawable/ic_menu_view"
+            app:tint="@color/dark_green" />
     </LinearLayout>
 
 </LinearLayout>

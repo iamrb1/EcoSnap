@@ -28,4 +28,16 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, Camera.class);
         startActivity(intent);
     }
+    public void onStartLeaderboard(View view) {
+        Intent intent = new Intent(this, Leaderboard.class);
+        startActivity(intent);
+    }
+    public void onStartProfile(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+    public void onStartHome(View view) {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
 }
