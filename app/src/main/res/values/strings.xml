@@ -6,4 +6,6 @@
     <string name="camera">Camera</string>
     <string name="profile">Profile</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="Home">Home</string>
+    <string name="HomeBody">Welcome to EcoSnap! Recycle and compete with your friends to see who is the best contributor to the environment! The application comes with four buttons: home, camera, profile, and leaderboard. The home button takes you to the homepage where as the camera button allows for you to take a picture of any item and determine whether it is recyclable or not. Create an account and view your profile details within profile and track your friends\' stats within the leaderboard page! Have fun recycling and engage in the competition!</string>
 </resources>
