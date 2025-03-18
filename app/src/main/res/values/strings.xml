@@ -15,4 +15,8 @@
     <string name="password">Password</string>
     <string name="create_account">Don\'t have an account? Create One</string>
     <string name="button">Button</string>
+    <string name="username_welcome">Welcome, %1$s!</string>
+    <string name="recycle_count">You have recycled a total of %1$d items!</string>
+    <string name="stats_text">Your stats</string>
+    <string name="goals_text">Your goals</string>
 </resources>
