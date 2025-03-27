@@ -13,9 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Profile extends AppCompatActivity {
 
-    String username = "User";
-
-    int num_recycled = 200;
+    // Default account, should get account from database
+    private Account currentAccount = new Account("User", "Test");
     TextView user_text;
     TextView recycle_text;
 
@@ -29,6 +28,9 @@ public class Profile extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        String username = currentAccount.getUsername();
+        int num_recycled = currentAccount.getRecycleCount();
 
         user_text = findViewById(R.id.username_welcome_text);
 
