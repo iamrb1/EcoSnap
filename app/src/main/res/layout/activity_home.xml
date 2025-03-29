@@ -31,6 +31,13 @@
             android:textColor="@color/dark_green"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="@string/logout" />
     </FrameLayout>
 
     <FrameLayout
