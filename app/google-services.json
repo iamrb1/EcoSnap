@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986999771797",
+    "project_id": "ecosnap-697d6",
+    "storage_bucket": "ecosnap-697d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986999771797:android:ce3dd2ac356464475e419c",
+        "android_client_info": {
+          "package_name": "edu.msu.cse476.baragurr.ecosnap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXLDP-WFfT7A9kx8MMimoeNwvrXywBr58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
