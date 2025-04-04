@@ -53,8 +53,13 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     PreviewView previewView;
     ImageButton bTakePicture;
+    ImageButton flashToggleIB;
+    ImageButton flipCameraIB;
     private ImageCapture imageCapture;
     private ImageAnalysis imageAnalysis;
+
+    private boolean flashEnabled = false;
+    private int lensFacing = CameraSelector.LENS_FACING_BACK;
 
 
     @Override
@@ -63,8 +68,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         setContentView(R.layout.activity_camera);
         bTakePicture = findViewById(R.id.captureIB);
         previewView = findViewById(R.id.previewView);
+        flashToggleIB = findViewById(R.id.flashToggleIB);
+        flipCameraIB = findViewById(R.id.flipCameraIB);
 
         bTakePicture.setOnClickListener(this);
+        flashToggleIB.setOnClickListener(this);
+        flipCameraIB.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -94,7 +103,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 
         //Camera selector use case
         CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .requireLensFacing(lensFacing)
                 .build();
 
         //Preview use case
@@ -105,6 +114,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         //Image capture use case
         imageCapture = new ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .setFlashMode(flashEnabled ? ImageCapture.FLASH_MODE_ON : ImageCapture.FLASH_MODE_OFF)
                 .build();
 
         //Image analysis use case
@@ -117,9 +127,51 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.captureIB) {
+        int id = view.getId();
+        if (id == R.id.captureIB) {
             capturePhoto();
+        } else if (id == R.id.flashToggleIB) {
+            toggleFlash();
+        } else if (id == R.id.flipCameraIB) {
+            flipCamera();
         }
+    }
+
+    private void toggleFlash() {
+        flashEnabled = !flashEnabled;
+        // Update the flash icon
+        flashToggleIB.setImageResource(flashEnabled ?
+                R.drawable.flash_on : R.drawable.flash_off);
+
+        // Restart camera with new flash setting
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                startCameraX(cameraProvider);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, getExecutor());
+    }
+
+    private void flipCamera() {
+        lensFacing = (lensFacing == CameraSelector.LENS_FACING_BACK) ?
+                CameraSelector.LENS_FACING_FRONT : CameraSelector.LENS_FACING_BACK;
+        // Restart camera with new lens facing setting
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                startCameraX(cameraProvider);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, getExecutor());
     }
 
     private void capturePhoto() {

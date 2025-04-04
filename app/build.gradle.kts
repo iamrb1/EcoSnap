@@ -52,6 +52,8 @@ dependencies {
     // If you want to additionally use the CameraX Extensions library
     implementation("androidx.camera:camera-extensions:${camerax_version}")
 
+    implementation("com.google.mlkit:image-labeling:17.0.9")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
