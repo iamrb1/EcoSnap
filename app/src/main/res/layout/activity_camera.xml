@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="5dp"
     tools:context=".Camera">
-
-    <FrameLayout
+    
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        />
+    
+    <ImageButton
+        android:id="@+id/captureIB"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/camera"
+        android:scaleType="centerCrop"
+        app:tint="@color/white"/>
 
-        <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/back_to_homepage"
-            android:gravity="start"
-            android:onClick="onBacktoHomepage"
-            app:srcCompat="?attr/homeAsUpIndicator" />
-    </FrameLayout>
+    <ImageButton
+        android:id="@+id/flashToggleIB"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/flash_off"
+        android:scaleType="centerCrop"
+        app:tint="@color/white"/>
 
-    <FrameLayout
-        android:id="@+id/cameraFrame"
-        android:layout_width="325dp"
-        android:layout_height="600dp"
-        android:background="@drawable/camera_border"
-        android:padding="2dp">
+    <ImageButton
+        android:id="@+id/flipCameraIB"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/flashToggleIB"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/flip"
+        android:scaleType="centerCrop"
+        app:tint="@color/white"/>
 
-        <TextureView
-            android:id="@+id/cameraPreview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/captureButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="2dp"
-        android:backgroundTint="@color/dark_green"
-        android:gravity="center"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:text="@string/snap"
-        android:textColor="@android:color/white" />
-
-</LinearLayout>
+</RelativeLayout>

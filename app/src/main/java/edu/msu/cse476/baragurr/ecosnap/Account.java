@@ -41,6 +41,12 @@ public class Account extends AppCompatActivity {
         setRecycleCount(0);
     }
 
+    public Account(){
+        setPassword("");
+        setUsername("");
+        setRecycleCount(0);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
