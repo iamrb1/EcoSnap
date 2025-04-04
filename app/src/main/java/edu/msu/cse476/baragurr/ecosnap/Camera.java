@@ -55,6 +55,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
     ImageButton bTakePicture;
     ImageButton flashToggleIB;
     ImageButton flipCameraIB;
+    ImageButton backIB;
     private ImageCapture imageCapture;
     private ImageAnalysis imageAnalysis;
 
@@ -70,10 +71,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         previewView = findViewById(R.id.previewView);
         flashToggleIB = findViewById(R.id.flashToggleIB);
         flipCameraIB = findViewById(R.id.flipCameraIB);
+        backIB = findViewById(R.id.backIB);
 
         bTakePicture.setOnClickListener(this);
         flashToggleIB.setOnClickListener(this);
         flipCameraIB.setOnClickListener(this);
+        backIB.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -134,6 +137,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
             toggleFlash();
         } else if (id == R.id.flipCameraIB) {
             flipCamera();
+        } else if (id == R.id.backIB) {
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
         }
     }
 
@@ -212,9 +218,4 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         image.close();
     }
 
-
-//    public void onBacktoHomepage(View view) {
-//        Intent intent = new Intent(this, Home.class);
-//        startActivity(intent);
-//    }
 }
