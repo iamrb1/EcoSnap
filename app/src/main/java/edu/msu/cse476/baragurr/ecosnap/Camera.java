@@ -25,8 +25,10 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -46,12 +48,13 @@ import java.util.Date;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class Camera extends AppCompatActivity implements View.OnClickListener {
+public class Camera extends AppCompatActivity implements View.OnClickListener, ImageAnalysis.Analyzer {
+
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     PreviewView previewView;
     ImageButton bTakePicture;
     private ImageCapture imageCapture;
-
+    private ImageAnalysis imageAnalysis;
 
 
     @Override
@@ -104,7 +107,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build();
 
-        cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
+        //Image analysis use case
+        imageAnalysis = new ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                        .build();
+
+        cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
     }
 
     @Override
@@ -143,6 +151,13 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                 }
         );
 
+    }
+
+    @Override
+    public void analyze(@NonNull ImageProxy image) {
+        // Image processing for current frame
+        Log.d("camera_analyze", "analyze: got the frame at " + image.getImageInfo().getTimestamp());
+        image.close();
     }
 
 
