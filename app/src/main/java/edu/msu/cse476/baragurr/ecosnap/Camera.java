@@ -237,7 +237,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
                 .build();
 
         VisionApiService service = retrofit.create(VisionApiService.class);
-        Call<VisionResponse> call = service.annotateImage(visionRequest, "AIzaSyBW3qFwzZvQnCbxRgGaJudUmYaSRZ9dWcM");
+        Call<VisionResponse> call = service.annotateImage(visionRequest, "");
 
         call.enqueue(new Callback<VisionResponse>() {
             @Override
