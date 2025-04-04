@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Ecosnap"
         tools:targetApi="31">
         <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".Account"
             android:exported="false" />
         <activity
@@ -32,13 +35,12 @@
             android:exported="true" />
         <activity
             android:name=".Startup"
-            android:exported="true"  >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

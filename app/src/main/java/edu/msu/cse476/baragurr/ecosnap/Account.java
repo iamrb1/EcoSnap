@@ -23,7 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class Account extends AppCompatActivity {
@@ -92,6 +92,16 @@ public class Account extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     //progressBar.setVisibility(View.GONE);
+
+                                    //Set a default username
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    String email = user.getEmail();
+                                    String name = email.split("@")[0];
+                                    UserProfileChangeRequest updates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name)
+                                            .build();
+                                    user.updateProfile(updates);
+
                                     Toast.makeText(Account.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Startup.class);
