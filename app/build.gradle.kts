@@ -14,6 +14,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -32,6 +33,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        android.buildFeatures.buildConfig = true
     }
 }
 
@@ -53,6 +55,9 @@ dependencies {
     implementation("androidx.camera:camera-extensions:${camerax_version}")
 
     implementation("com.google.mlkit:image-labeling:17.0.9")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)

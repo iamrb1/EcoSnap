@@ -5,15 +5,19 @@ import static edu.msu.cse476.baragurr.ecosnap.R.layout.activity_camera;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
@@ -39,17 +43,33 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.label.ImageLabel;
+import com.google.mlkit.vision.label.ImageLabeler;
+import com.google.mlkit.vision.label.ImageLabeling;
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions;
 
 import org.jspecify.annotations.NonNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.HttpException;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Camera extends AppCompatActivity implements View.OnClickListener, ImageAnalysis.Analyzer {
 
+    private int counter = 0;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     PreviewView previewView;
     ImageButton bTakePicture;
@@ -61,6 +81,8 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 
     private boolean flashEnabled = false;
     private int lensFacing = CameraSelector.LENS_FACING_BACK;
+
+    private String recyclabilityLabel = "Unknown"; // Stores the ML Kit result
 
 
     @Override
@@ -132,6 +154,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.captureIB) {
+            counter += 1;
             capturePhoto();
         } else if (id == R.id.flashToggleIB) {
             toggleFlash();
@@ -200,6 +223,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
                     @Override
                     public void onImageSaved(ImageCapture.@NonNull OutputFileResults outputFileResults) {
                         Toast.makeText(Camera.this, "Photo has been saved successfully", Toast.LENGTH_SHORT).show();
+                        analyzeImage(photoFile.getAbsolutePath());
                     }
 
                     @Override
@@ -218,4 +242,125 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         image.close();
     }
 
+    private void analyzeImage(String imagePath) {
+        String base64Image = encodeImageToBase64(imagePath);
+        if (base64Image == null) {
+            runOnUiThread(() ->
+                    Toast.makeText(this, "Failed to encode image", Toast.LENGTH_SHORT).show()
+            );
+            return;
+        }
+
+        VisionRequest.Request request = new VisionRequest.Request(base64Image);
+        VisionRequest visionRequest = new VisionRequest(request);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://vision.googleapis.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        VisionApiService service = retrofit.create(VisionApiService.class);
+        Call<VisionResponse> call = service.annotateImage(visionRequest, "");
+
+        call.enqueue(new Callback<VisionResponse>() {
+            @Override
+            public void onResponse(Call<VisionResponse> call, Response<VisionResponse> response) {
+                recyclabilityLabel = "Unknown"; // Default recyclability label
+                String itemLabel = "Unknown item"; // Default item label
+
+                if (response.isSuccessful()) {
+                    Log.d("VisionAPI", "Successful response: " + response.body());
+
+                    if (response.body() != null) {
+                        try {
+                            Log.d("VisionAPI", "Response Body: " + response.body().toString());
+
+                            List<VisionResponse.LabelAnnotation> labels =
+                                    response.body().responses.get(0).labelAnnotations;
+
+                            if (labels != null && !labels.isEmpty()) {
+                                for (VisionResponse.LabelAnnotation label : labels) {
+                                    String desc = label.description.toLowerCase();
+                                    Log.d("VisionAPI", "Label: " + desc);
+
+                                    // Check if the description contains recyclable material keywords
+                                    if (isRecyclable(desc)) {
+                                        recyclabilityLabel = "Recyclable";
+                                        itemLabel = label.description; // Update item label
+                                        break;
+                                    }
+                                }
+
+                                if (itemLabel.equals("Unknown item")) {
+                                    itemLabel = labels.get(0).description; // Default to first label if none match
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("VisionAPI", "Exception while parsing response", e);
+                        }
+                    }
+                } else {
+                    Log.e("VisionAPI", "Unsuccessful response: " + response.code() + " " + response.message());
+                }
+
+                // Show the item label directly from Vision API along with recyclability status
+                String resultMessage = itemLabel + " is " + recyclabilityLabel;
+
+                runOnUiThread(() ->
+                        Toast.makeText(Camera.this, resultMessage, Toast.LENGTH_LONG).show()
+                );
+            }
+
+            @Override
+            public void onFailure(Call<VisionResponse> call, Throwable t) {
+                Log.e("VisionAPI", "Failed to call Vision API", t);
+                if (t instanceof HttpException) {
+                    HttpException httpException = (HttpException) t;
+                    Response<?> response = httpException.response();
+                    try {
+                        String errorBody = response.errorBody() != null ? response.errorBody().string() : "No error body";
+                        Log.e("VisionAPI", "Response Body: " + errorBody);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                runOnUiThread(() ->
+                        Toast.makeText(Camera.this, "Vision API call failed: " + t.getMessage(), Toast.LENGTH_LONG).show()
+                );
+            }
+        });
+    }
+
+    private String encodeImageToBase64(String imagePath) {
+        try {
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+            byte[] imageBytes = baos.toByteArray();
+            return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private boolean isRecyclable(String item) {
+        List<String> recyclableItems = Arrays.asList(
+                "plastic", "glass", "paper", "cardboard", "can", "tin", "aluminum",
+                "magazine", "newspaper", "carton", "bottle", "box", "jar"
+        );
+
+        for (String recyclable : recyclableItems) {
+            if (item.contains(recyclable)) return true;
+        }
+        return false;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
 }
