@@ -28,8 +28,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Account extends AppCompatActivity {
 
-
-
     TextInputEditText editTextUsername, editTextPassword;
     Button buttonReg;
     FirebaseAuth mAuth;

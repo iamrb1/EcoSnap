@@ -29,7 +29,6 @@ public class Home extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Startup.class );
             startActivity(intent);
             finish();
-
         }
         else{
             //textView.setText(user.getEmail());
