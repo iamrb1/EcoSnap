@@ -237,12 +237,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
                 .build();
 
         VisionApiService service = retrofit.create(VisionApiService.class);
-        Call<VisionResponse> call = service.annotateImage(visionRequest, "");
+        Call<VisionResponse> call = service.annotateImage(visionRequest, "AIzaSyBW3qFwzZvQnCbxRgGaJudUmYaSRZ9dWcM");
 
         call.enqueue(new Callback<VisionResponse>() {
             @Override
             public void onResponse(Call<VisionResponse> call, Response<VisionResponse> response) {
-                recyclabilityLabel = "Unknown"; // Default recyclability label
+                recyclabilityLabel = "Not Recyclable"; // Default recyclability label
                 String itemLabel = "Unknown item"; // Default item label
 
                 if (response.isSuccessful()) {
