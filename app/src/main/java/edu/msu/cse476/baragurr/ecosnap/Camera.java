@@ -9,7 +9,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.Manifest;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jspecify.annotations.NonNull;
 
@@ -46,7 +52,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Camera extends AppCompatActivity implements View.OnClickListener, ImageAnalysis.Analyzer {
 
-    private int counter = 0;
+    FirebaseAuth auth;
+    Button button;
+//    TextView textView;
+    FirebaseUser user;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     PreviewView previewView;
     ImageButton bTakePicture;
@@ -66,6 +75,11 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        //added
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
         bTakePicture = findViewById(R.id.captureIB);
         previewView = findViewById(R.id.previewView);
         flashToggleIB = findViewById(R.id.flashToggleIB);
@@ -76,6 +90,17 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         flashToggleIB.setOnClickListener(this);
         flipCameraIB.setOnClickListener(this);
         backIB.setOnClickListener(this);
+
+//        //added
+//        if (user == null) {
+//            Intent intent = new Intent(getApplicationContext(), Camera.class);
+//            startActivity(intent);
+//            finish();
+//
+//        } else {
+//            textView.setText(user.getEmail());
+//        }
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -131,8 +156,33 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.captureIB) {
-            counter += 1;
             capturePhoto();
+            String uid = user.getUid();
+
+
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("user_clicks").child(uid);
+            //userRef.child("buttonClicks").setValue(clickCount);
+            userRef.child("email").setValue(user.getEmail());
+
+
+            DatabaseReference userClicksRef = FirebaseDatabase.getInstance()
+                    .getReference("user_clicks")
+                    .child(uid)
+                    .child("buttonClicks");
+
+
+
+
+            userClicksRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    long currentClicks = 0;
+                    if (task.getResult().exists()) {
+                        currentClicks = task.getResult().getValue(Long.class);
+                    }
+                    userClicksRef.setValue(currentClicks + 1);
+                }
+            });
         } else if (id == R.id.flashToggleIB) {
             toggleFlash();
         } else if (id == R.id.flipCameraIB) {
@@ -333,11 +383,4 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         return false;
     }
 
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
 }
