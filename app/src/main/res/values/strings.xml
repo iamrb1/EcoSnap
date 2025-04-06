@@ -20,4 +20,8 @@
     <string name="stats_text">Your stats</string>
     <string name="goals_text">Your goals</string>
     <string name="Record">Record</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="click_to_login">Click to Login</string>
+    <string name="logout">Logout</string>
 </resources>

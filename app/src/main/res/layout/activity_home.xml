@@ -9,17 +9,21 @@
     android:orientation="vertical"
     tools:context=".Home">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2">
 
+
     </FrameLayout>
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5">
+
 
         <TextView
             android:id="@+id/textView"
@@ -31,12 +35,22 @@
             android:textColor="@color/dark_green"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="@string/logout" />
     </FrameLayout>
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4">
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -45,6 +59,7 @@
             android:background="@drawable/design"
             app:cardCornerRadius="30dp"
             app:cardElevation="20dp">
+
 
             <TextView
                 android:id="@+id/textView2"
@@ -59,11 +74,13 @@
         </androidx.cardview.widget.CardView>
     </FrameLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.75"
         android:orientation="horizontal">
+
 
         <ImageButton
             android:id="@+id/Home"
@@ -76,6 +93,7 @@
             android:src="@android:drawable/btn_star"
             app:tint="@color/dark_green" />
 
+
         <ImageButton
             android:id="@+id/Leaderboard"
             android:layout_width="wrap_content"
@@ -86,6 +104,7 @@
             android:onClick="onStartLeaderboard"
             android:src="@android:drawable/ic_menu_myplaces"
             app:tint="@color/dark_green" />
+
 
         <ImageButton
             android:id="@+id/Camera"
@@ -98,6 +117,7 @@
             android:src="@android:drawable/ic_menu_camera"
             app:tint="@color/dark_green" />
 
+
         <ImageButton
             android:id="@+id/Profile"
             android:layout_width="wrap_content"
@@ -109,5 +129,6 @@
             android:src="@android:drawable/ic_menu_view"
             app:tint="@color/dark_green" />
     </LinearLayout>
+
 
 </LinearLayout>

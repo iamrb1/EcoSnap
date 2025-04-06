@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "edu.msu.cse476.baragurr.ecosnap"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -39,6 +40,8 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
     val camerax_version = "1.5.0-alpha06"
     // The following line is optional, as the core library is included indirectly by camera-camera2
     implementation("androidx.camera:camera-core:${camerax_version}")

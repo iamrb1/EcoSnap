@@ -20,6 +20,16 @@
         android:theme="@style/Theme.Ecosnap"
         tools:targetApi="31">
         <activity
+            android:name=".Startup"
+            android:exported="true"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".Account"
             android:exported="false" />
         <activity
@@ -34,16 +44,6 @@
         <activity
             android:name=".Home"
             android:exported="true" />
-        <activity
-            android:name=".Startup"
-            android:exported="true"  >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
     </application>
 
 </manifest>
