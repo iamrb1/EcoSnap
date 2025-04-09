@@ -12,13 +12,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="0.5">
 
         <TextView
@@ -36,7 +29,7 @@
             android:id="@+id/logout"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:text="@string/logout" />
     </FrameLayout>
 
@@ -70,51 +63,63 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.75"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        >
 
         <ImageButton
             android:id="@+id/Home"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="8dp"
             android:background="@drawable/circle"
             android:contentDescription="@string/homepage"
             android:onClick="onStartHome"
             android:src="@android:drawable/btn_star"
+            android:adjustViewBounds="true"
             app:tint="@color/dark_green" />
 
         <ImageButton
             android:id="@+id/Leaderboard"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="8dp"
             android:background="@drawable/circle"
             android:contentDescription="@string/map"
             android:onClick="onStartLeaderboard"
             android:src="@android:drawable/ic_menu_myplaces"
+            android:adjustViewBounds="true"
             app:tint="@color/dark_green" />
 
         <ImageButton
             android:id="@+id/Camera"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="8dp"
             android:background="@drawable/circle"
             android:contentDescription="@string/camera"
             android:onClick="onStartCamera"
             android:src="@android:drawable/ic_menu_camera"
+            android:adjustViewBounds="true"
             app:tint="@color/dark_green" />
 
         <ImageButton
             android:id="@+id/Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="8dp"
             android:background="@drawable/circle"
             android:contentDescription="@string/profile"
             android:onClick="onStartProfile"
             android:src="@android:drawable/ic_menu_view"
+            android:adjustViewBounds="true"
             app:tint="@color/dark_green" />
+
     </LinearLayout>
 
 </LinearLayout>
