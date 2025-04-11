@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:fillViewport="true"
+    android:background="@drawable/ic_launcher_background"
+    >
 
-
-    <TextView
-        android:id="@+id/leaderboardText"
+    <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Loading leaderboard..."
-        android:textSize="16sp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/ic_launcher_background">
+
+        <TextView
+            android:id="@+id/tvLeaderboardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/leaderboard"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/back_to_homepage"
+                android:gravity="start"
+                android:onClick="onBackClick"
+                app:srcCompat="?attr/homeAsUpIndicator" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/leaderboardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
 </ScrollView>
