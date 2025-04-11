@@ -113,7 +113,7 @@
                     android:drawableLeft="@drawable/ic_launcher_foreground"
                     android:drawablePadding="8dp"
                     android:hint="@string/password"
-
+                    android:inputType="textPassword"
 
                     android:padding="8dp"
                     android:textColor="@color/black"

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.Manifest;
 import android.widget.Button;
@@ -70,6 +71,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 
     private String recyclabilityLabel = "Unknown"; // Stores the ML Kit result
 
+    private float currentZoomRatio = 1.0f;
+    private androidx.camera.core.Camera camera;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +104,31 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 //        } else {
 //            textView.setText(user.getEmail());
 //        }
+
+        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(this,
+                new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                    @Override
+                    public boolean onScale(ScaleGestureDetector detector) {
+                        float scale = detector.getScaleFactor();
+                        float newZoom = currentZoomRatio * scale;
+
+                        if (camera != null && camera.getCameraInfo().getZoomState().getValue() != null) {
+                            float clampedZoom = Math.max(
+                                    camera.getCameraInfo().getZoomState().getValue().getMinZoomRatio(),
+                                    Math.min(newZoom, camera.getCameraInfo().getZoomState().getValue().getMaxZoomRatio())
+                            );
+                            camera.getCameraControl().setZoomRatio(clampedZoom);
+                            currentZoomRatio = clampedZoom;
+                        }
+
+                        return true;
+                    }
+                });
+
+        previewView.setOnTouchListener((v, event) -> {
+            scaleGestureDetector.onTouchEvent(event);
+            return true;
+        });
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -148,6 +177,11 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
         imageAnalysis = new ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
+
+        camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
+
+
+        currentZoomRatio = camera.getCameraInfo().getZoomState().getValue().getZoomRatio();
 
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
     }
