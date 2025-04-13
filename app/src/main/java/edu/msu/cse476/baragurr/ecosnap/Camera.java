@@ -407,8 +407,11 @@ public class Camera extends AppCompatActivity implements View.OnClickListener, I
 
     private boolean isRecyclable(String item) {
         List<String> recyclableItems = Arrays.asList(
-                "plastic", "glass", "paper", "cardboard", "can", "tin", "aluminum",
-                "magazine", "newspaper", "carton", "bottle", "box", "jar"
+                "plastic", "glass", "paper", "cardboard", "aluminum", "steel", "tin", "rubber", "wood", "copper",
+                "brass", "iron", "magazine", "newspaper", "carton", "bottle", "can", "jar", "box", "foil",
+                "envelope", "notebook", "printer paper", "shredded paper", "cereal box", "pizza box", "shoe box", "egg carton", "milk jug", "plastic bag",
+                "plastic container", "plastic wrap", "plastic lid", "glass bottle", "glass jar", "wine bottle", "beer bottle", "metal lid", "wire", "light bulb",
+                "mobile phone", "battery", "textile", "fabric", "denim", "cotton", "hanger", "pan", "e-waste", "canister"
         );
 
         for (String recyclable : recyclableItems) {
