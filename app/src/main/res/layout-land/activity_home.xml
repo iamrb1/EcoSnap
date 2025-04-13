@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/forest_background"
+    tools:context=".Home">
+
+
+    <!-- Menu Button (Top Right) -->
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_more"
+        android:contentDescription="@string/toggle_menu"
+        app:tint="@color/dark_green" />
+
+
+    <!-- Home Title -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Home"
+        android:textColor="@color/dark_green"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp" />
+
+
+    <!-- Dropdown Welcome Message -->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:background="@color/green"
+        android:text="@string/HomeBody"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        />
+
+
+    <!-- Bottom Navigation Buttons -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        android:background="@android:color/transparent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center">
+
+
+            <ImageButton
+                android:id="@+id/logout"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/homepage"
+                android:onClick="onStartHome"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@color/dark_green" />
+
+
+            <ImageButton
+                android:id="@+id/Leaderboard"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/map"
+                android:onClick="onStartLeaderboard"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="@color/dark_green" />
+
+
+            <ImageButton
+                android:id="@+id/Camera"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/camera"
+                android:onClick="onStartCamera"
+                android:src="@android:drawable/ic_menu_camera"
+                app:tint="@color/dark_green" />
+
+
+            <ImageButton
+                android:id="@+id/Profile"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/profile"
+                android:onClick="onStartProfile"
+                android:src="@android:drawable/ic_menu_view"
+                app:tint="@color/dark_green" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+
+
+
+
