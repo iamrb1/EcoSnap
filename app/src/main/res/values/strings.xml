@@ -24,4 +24,7 @@
     <string name="register">Register</string>
     <string name="click_to_login">Click to Login</string>
     <string name="logout">Logout</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="set_your_goal">Set your goal</string>
+    <string name="save_goal">Save Goal</string>"
 </resources>

@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#378F5B</color>
     <color name="dark_green">#024b30</color>
+    <color name="forest_green">#CC0B2E2A</color>
+    <color name="earth_brown">#CC5C3A25</color>
+    <color name="cream">#E5D8C0</color>
+    <color name="shadow">#80000000</color>
+    <color name="light_cream">#fff6e6</color>
 </resources>
