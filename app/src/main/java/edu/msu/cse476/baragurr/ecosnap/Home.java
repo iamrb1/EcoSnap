@@ -4,7 +4,10 @@ package edu.msu.cse476.baragurr.ecosnap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -16,8 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth auth;
-    Button button;
-    TextView textView;
+    ImageButton logoutButton;
+    ImageButton menuButton;
+    TextView dropdownText;
     FirebaseUser user;
 
 
@@ -26,30 +30,45 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         auth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.logout);
-        //textView = findViewById(R.id.user_details);
+        logoutButton = findViewById(R.id.logout);
+        menuButton = findViewById(R.id.menuButton);
+        dropdownText = findViewById(R.id.textView2);
+
+
         user = auth.getCurrentUser();
         if (user == null){
             Intent intent = new Intent(getApplicationContext(), Startup.class );
             startActivity(intent);
             finish();
-
-
         }
-        else{
-            //textView.setText(user.getEmail());
-        }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), Startup.class );
-                startActivity(intent);
-                finish();
 
 
+        logoutButton.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), Startup.class );
+            startActivity(intent);
+            finish();
+
+
+        });
+
+
+        // Load the slide-in and fade-in animation
+        Animation slideInFadeIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_fade_in);
+        Animation slideOutFadeOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_fade_out);
+
+
+        menuButton.setOnClickListener(v -> {
+            if (dropdownText.getVisibility() == View.GONE) {
+                dropdownText.setVisibility(View.VISIBLE);
+                dropdownText.startAnimation(slideInFadeIn);  // Apply slide-in and fade-in when shown
+            } else {
+                dropdownText.startAnimation(slideOutFadeOut); // Apply slide-out and fade-out when hiding
+                dropdownText.setVisibility(View.GONE); // After animation is done, hide the view
             }
         });
+
+
     }
 
 
@@ -70,3 +89,7 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+
+

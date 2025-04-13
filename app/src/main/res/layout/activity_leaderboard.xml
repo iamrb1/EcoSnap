@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/forest_background"
     >
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@drawable/ic_launcher_background">
+        android:background="@drawable/forest_background">
 
         <TextView
             android:id="@+id/tvLeaderboardTitle"
@@ -25,7 +25,8 @@
             android:text="@string/leaderboard"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/forest_green"/>
 
         <FrameLayout
             android:layout_width="match_parent"
