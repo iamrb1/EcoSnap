@@ -41,16 +41,17 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@id/textView"
         android:layout_marginTop="16dp"
         android:padding="16dp"
         android:background="@color/green"
         android:text="@string/HomeBody"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
 
     <!-- Bottom Navigation Buttons -->
