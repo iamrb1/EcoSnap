@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/login"
                 android:textAlignment="center"
-                android:textColor="@color/green"
+                android:backgroundTint="@color/forest_green"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -74,51 +74,46 @@
 
 
 
+            <!-- Username Field -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#33FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-
-
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/design"
-                    android:drawableLeft="@drawable/ic_launcher_foreground"
-                    android:drawablePadding="8dp"
                     android:hint="@string/username"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" />
-
-
+                    android:background="@android:color/transparent" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
+            <!-- Password Field -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:boxBackgroundColor="#33FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/design"
-                    android:drawableLeft="@drawable/ic_launcher_foreground"
-                    android:drawablePadding="8dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" />
-
-
+                    android:background="@android:color/transparent" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -127,11 +122,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/forest_green"
                 android:text="@string/login"
                 android:onClick="onClick"
                 android:textSize="18sp"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="20dp"
+                />
 
 
         </LinearLayout>
@@ -150,7 +146,8 @@
         android:text="@string/create_account"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="italic"/>
 
 
 

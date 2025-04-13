@@ -108,4 +108,15 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/back_to_homepage"
+        android:gravity="start"
+        android:onClick="onBackClick"
+        app:srcCompat="?attr/homeAsUpIndicator" />
 </LinearLayout>

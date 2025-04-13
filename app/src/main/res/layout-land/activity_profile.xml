@@ -53,6 +53,7 @@
                 android:textColor="@android:color/white"
                 android:gravity="center"
                 android:background="@color/forest_green"/>
+
         </LinearLayout>
 
 
@@ -100,7 +101,7 @@
                     android:id="@+id/goalEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Set your goal"
+                    android:hint="@string/set_your_goal"
                     android:inputType="text"
                     android:minHeight="48dp"
                     android:padding="10dp"
@@ -111,11 +112,23 @@
                     android:id="@+id/saveGoalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save Goal"
+                    android:text="@string/save_goal"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/dark_green"
                     android:textColor="@android:color/white" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/back_to_homepage"
+        android:gravity="start"
+        android:onClick="onBackClick"
+        app:srcCompat="?attr/homeAsUpIndicator" />
 </LinearLayout>

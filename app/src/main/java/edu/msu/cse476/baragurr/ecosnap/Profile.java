@@ -1,6 +1,7 @@
 package edu.msu.cse476.baragurr.ecosnap;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -104,5 +105,9 @@ public class Profile extends AppCompatActivity {
         });
 
 
+    }
+
+    public void onBackClick(View view) {
+        finish();
     }
 }

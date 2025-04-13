@@ -28,4 +28,7 @@
     <string name="set_your_goal">Set your goal</string>
     <string name="save_goal">Save Goal</string>
     <string name="toggle_menu">Toggle Menu</string>
+    <string name="password_must_be_6_characters_or_more">Password must be 6 characters or more</string>
+    <string name="todo">TODO</string>
+    <string name="todo2">TODO</string>
 </resources>

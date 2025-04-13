@@ -1,84 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/forest_background"
-    android:fillViewport="true"
+    android:padding="24dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:baselineAligned="false"
     tools:context=".Account">
 
-
+    <!-- Left side: Banner + Title -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="24dp"
-        android:gravity="center_vertical"
-        android:baselineAligned="false">
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal"
+        android:paddingEnd="12dp">
 
+        <!-- Banner Image -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
 
-        <!-- Left side: Banner + Title -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="top|center_horizontal"
-            android:paddingEnd="12dp">
+        </FrameLayout>
 
+        <!-- Title Box -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:background="#AA2F2F2F">
 
-            <!-- Banner Image -->
-            <ImageView
-                android:id="@+id/bannerImage"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/banner_image"/>
-
-
-            <!-- Title Box -->
-            <androidx.cardview.widget.CardView
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                android:background="#AA2F2F2F">
+                android:background="@color/dark_green"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/light_cream"
+                android:textSize="42sp"
+                android:textStyle="italic|normal" />
+        </androidx.cardview.widget.CardView>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/dark_green"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textColor="@color/light_cream"
-                    android:textSize="42sp"
-                    android:textStyle="italic|normal" />
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
+    <!-- Right side: Register Box -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:background="#CC2F2F2F">
 
-
-
-        <!-- Right side: Register Box -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            android:background="#CC2F2F2F">
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="24dp">
-
 
                 <!-- Register Text -->
                 <TextView
@@ -92,7 +89,6 @@
                     android:textStyle="bold"
                     android:paddingBottom="16dp" />
 
-
                 <!-- Username Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -103,7 +99,6 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp">
 
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/username"
                         android:layout_width="match_parent"
@@ -113,7 +108,6 @@
                         android:textColor="@color/black"
                         android:background="@android:color/transparent" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <!-- Password Input -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +120,6 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp">
 
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
@@ -138,17 +131,15 @@
                         android:background="@android:color/transparent" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-
                 <TextView
                     android:id="@+id/passwordHelperText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password must be 6 characters or more"
+                    android:text="@string/password_must_be_6_characters_or_more"
                     android:textColor="#AA0000"
                     android:textSize="14sp"
                     android:layout_marginTop="4dp"
-                    android:paddingLeft="4dp"/>  <!-- soft red color -->
-
+                    android:paddingLeft="4dp" />
 
                 <!-- Register Button -->
                 <Button
@@ -162,7 +153,6 @@
                     android:textSize="18sp"
                     app:cornerRadius="16dp" />
 
-
                 <!-- Login Redirect -->
                 <TextView
                     android:id="@+id/loginNow"
@@ -175,10 +165,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-</ScrollView>
-
-
-
-
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
